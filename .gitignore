@@ -9,10 +9,6 @@ bin/
 *.out
 coverage.html
 
-# Generated files
-*.pb.go
-*_grpc.pb.go
-
 # IDE
 .vscode/
 .idea/
