@@ -1,0 +1,476 @@
+syntax = "proto3";
+
+package ua_kernel.v1;
+
+option go_package = "github.com/ambientlabscomputing/umc_sdk/proto/ua_kernel/v1;ua_kernelv1";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+// EventService handles event routing between the kernel and UMCs
+service EventService {
+  // EmitEvent publishes an event to the kernel event bus
+  rpc EmitEvent(EmitEventRequest) returns (EmitEventResponse);
+  
+  // SubscribeLocal subscribes to local events (server-streaming)
+  rpc SubscribeLocal(SubscribeLocalRequest) returns (stream LocalEvent);
+}
+
+// ExecService provides process execution authority
+service ExecService {
+  // RunProcess executes a process with the given parameters
+  rpc RunProcess(RunProcessRequest) returns (RunProcessResponse);
+  
+  // StopProcess terminates a running process
+  rpc StopProcess(StopProcessRequest) returns (StopProcessResponse);
+  
+  // InspectProcess retrieves process status and metadata
+  rpc InspectProcess(InspectProcessRequest) returns (InspectProcessResponse);
+}
+
+// IdentityService manages node identity and cryptographic operations
+service IdentityService {
+  // GetNodeIdentity returns the node's identity information
+  rpc GetNodeIdentity(GetNodeIdentityRequest) returns (GetNodeIdentityResponse);
+  
+  // SignPayload signs arbitrary data with the node's private key
+  rpc SignPayload(SignPayloadRequest) returns (SignPayloadResponse);
+  
+  // VerifyTrust verifies a signature against trusted certificates
+  rpc VerifyTrust(VerifyTrustRequest) returns (VerifyTrustResponse);
+  
+  // IssueLocalCertificate generates a local certificate for a component
+  rpc IssueLocalCertificate(IssueLocalCertificateRequest) returns (IssueLocalCertificateResponse);
+}
+
+// SecretService manages secret storage and retrieval
+service SecretService {
+  // StoreSecret securely stores a secret
+  rpc StoreSecret(StoreSecretRequest) returns (StoreSecretResponse);
+  
+  // GetSecret retrieves a stored secret
+  rpc GetSecret(GetSecretRequest) returns (GetSecretResponse);
+  
+  // MountSecret makes a secret available to a process
+  rpc MountSecret(MountSecretRequest) returns (MountSecretResponse);
+  
+  // ListSecrets returns metadata for available secrets
+  rpc ListSecrets(ListSecretsRequest) returns (ListSecretsResponse);
+}
+
+// ClusterService provides cluster state and coordination
+service ClusterService {
+  // GetClusterState retrieves current cluster state
+  rpc GetClusterState(GetClusterStateRequest) returns (GetClusterStateResponse);
+  
+  // ProposeClusterConfig proposes a configuration change
+  rpc ProposeClusterConfig(ProposeClusterConfigRequest) returns (ProposeClusterConfigResponse);
+  
+  // JoinCluster initiates cluster join ceremony
+  rpc JoinCluster(JoinClusterRequest) returns (JoinClusterResponse);
+  
+  // GetKV retrieves a value from cluster KV store
+  rpc GetKV(GetKVRequest) returns (GetKVResponse);
+  
+  // PutKV stores a value in cluster KV store
+  rpc PutKV(PutKVRequest) returns (PutKVResponse);
+}
+
+// ProviderService manages capability provider lifecycle
+service ProviderService {
+  // InstallProvider downloads and stages a provider
+  rpc InstallProvider(InstallProviderRequest) returns (InstallProviderResponse);
+  
+  // StartProvider launches a provider process
+  rpc StartProvider(StartProviderRequest) returns (StartProviderResponse);
+  
+  // StopProvider terminates a provider process
+  rpc StopProvider(StopProviderRequest) returns (StopProviderResponse);
+  
+  // GrantCapability grants a capability to a provider
+  rpc GrantCapability(GrantCapabilityRequest) returns (GrantCapabilityResponse);
+  
+  // RevokeCapability revokes a capability from a provider
+  rpc RevokeCapability(RevokeCapabilityRequest) returns (RevokeCapabilityResponse);
+  
+  // ListProviders returns installed providers
+  rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
+}
+
+// ========================================
+// Event Service Messages
+// ========================================
+
+message EmitEventRequest {
+  string event_type = 1;
+  string entity_kind = 2;
+  string entity_id = 3;
+  google.protobuf.Struct payload = 4;
+  string trace_id = 5;
+}
+
+message EmitEventResponse {
+  string event_id = 1;
+  google.protobuf.Timestamp emitted_at = 2;
+}
+
+message SubscribeLocalRequest {
+  repeated string event_type_filter = 1;
+  map<string, uint64> last_seen_seq = 2;
+  uint32 buffer_size_hint = 3;
+}
+
+message LocalEvent {
+  string event_id = 1;
+  string event_type = 2;
+  google.protobuf.Timestamp emitted_at = 3;
+  string cluster_id = 4;
+  string node_id = 5;
+  uint64 seq = 6;
+  string entity_kind = 7;
+  string entity_id = 8;
+  google.protobuf.Struct payload = 9;
+  string signature = 10;
+}
+
+// ========================================
+// Exec Service Messages
+// ========================================
+
+message RunProcessRequest {
+  string command = 1;
+  repeated string args = 2;
+  map<string, string> env = 3;
+  string working_dir = 4;
+  uint32 timeout_seconds = 5;
+  string user = 6;
+  string trace_id = 7;
+}
+
+message RunProcessResponse {
+  string process_id = 1;
+  int32 exit_code = 2;
+  string stdout = 3;
+  string stderr = 4;
+  string error = 5;
+  uint64 duration_ms = 6;
+}
+
+message StopProcessRequest {
+  string process_id = 1;
+  bool force = 2;
+  uint32 grace_period_seconds = 3;
+}
+
+message StopProcessResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message InspectProcessRequest {
+  string process_id = 1;
+}
+
+message InspectProcessResponse {
+  string process_id = 1;
+  ProcessState state = 2;
+  int32 pid = 3;
+  google.protobuf.Timestamp start_time = 4;
+  uint64 restart_count = 5;
+  string health_status = 6;
+}
+
+enum ProcessState {
+  PROCESS_STATE_UNSPECIFIED = 0;
+  PROCESS_STATE_STARTING = 1;
+  PROCESS_STATE_RUNNING = 2;
+  PROCESS_STATE_STOPPING = 3;
+  PROCESS_STATE_STOPPED = 4;
+  PROCESS_STATE_CRASHED = 5;
+  PROCESS_STATE_FAILED = 6;
+  PROCESS_STATE_RESTARTING = 7;
+}
+
+// ========================================
+// Identity Service Messages
+// ========================================
+
+message GetNodeIdentityRequest {}
+
+message GetNodeIdentityResponse {
+  string node_id = 1;
+  string org_id = 2;
+  string cluster_id = 3;
+  string public_key_pem = 4;
+  repeated string certificate_chain_pem = 5;
+}
+
+message SignPayloadRequest {
+  bytes payload = 1;
+  string key_id = 2;
+}
+
+message SignPayloadResponse {
+  bytes signature = 1;
+  string algorithm = 2;
+}
+
+message VerifyTrustRequest {
+  bytes payload = 1;
+  bytes signature = 2;
+  string signer_cert_pem = 3;
+}
+
+message VerifyTrustResponse {
+  bool trusted = 1;
+  string error = 2;
+  string signer_id = 3;
+}
+
+message IssueLocalCertificateRequest {
+  string component_name = 1;
+  repeated string dns_names = 2;
+  repeated string ip_addresses = 3;
+  uint32 validity_days = 4;
+}
+
+message IssueLocalCertificateResponse {
+  string certificate_pem = 1;
+  string private_key_pem = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}
+
+// ========================================
+// Secret Service Messages
+// ========================================
+
+message StoreSecretRequest {
+  string key = 1;
+  bytes value = 2;
+  map<string, string> metadata = 3;
+}
+
+message StoreSecretResponse {
+  string version = 1;
+  google.protobuf.Timestamp created_at = 2;
+}
+
+message GetSecretRequest {
+  string key = 1;
+  string version = 2;
+}
+
+message GetSecretResponse {
+  bytes value = 1;
+  string version = 2;
+  map<string, string> metadata = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message MountSecretRequest {
+  string key = 1;
+  string target_path = 2;
+  string process_id = 3;
+}
+
+message MountSecretResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ListSecretsRequest {
+  string prefix = 1;
+}
+
+message ListSecretsResponse {
+  repeated SecretMetadata secrets = 1;
+}
+
+message SecretMetadata {
+  string key = 1;
+  string version = 2;
+  google.protobuf.Timestamp created_at = 3;
+  map<string, string> metadata = 4;
+}
+
+// ========================================
+// Cluster Service Messages
+// ========================================
+
+message GetClusterStateRequest {}
+
+message GetClusterStateResponse {
+  string cluster_id = 1;
+  string leader_id = 2;
+  repeated NodeInfo nodes = 3;
+  ClusterHealth health = 4;
+  uint64 raft_index = 5;
+  uint64 raft_term = 6;
+}
+
+message NodeInfo {
+  string node_id = 1;
+  string address = 2;
+  NodeRole role = 3;
+  NodeState state = 4;
+  google.protobuf.Timestamp last_seen = 5;
+}
+
+enum NodeRole {
+  NODE_ROLE_UNSPECIFIED = 0;
+  NODE_ROLE_VOTER = 1;
+  NODE_ROLE_NONVOTER = 2;
+  NODE_ROLE_STAGING = 3;
+}
+
+enum NodeState {
+  NODE_STATE_UNSPECIFIED = 0;
+  NODE_STATE_ALIVE = 1;
+  NODE_STATE_SUSPECT = 2;
+  NODE_STATE_DEAD = 3;
+}
+
+enum ClusterHealth {
+  CLUSTER_HEALTH_UNSPECIFIED = 0;
+  CLUSTER_HEALTH_HEALTHY = 1;
+  CLUSTER_HEALTH_DEGRADED = 2;
+  CLUSTER_HEALTH_CRITICAL = 3;
+}
+
+message ProposeClusterConfigRequest {
+  repeated NodeInfo nodes = 1;
+  string reason = 2;
+}
+
+message ProposeClusterConfigResponse {
+  bool accepted = 1;
+  string error = 2;
+  uint64 applied_index = 3;
+}
+
+message JoinClusterRequest {
+  string join_token = 1;
+  string node_address = 2;
+}
+
+message JoinClusterResponse {
+  bool success = 1;
+  string error = 2;
+  string cluster_id = 3;
+}
+
+message GetKVRequest {
+  string key = 1;
+}
+
+message GetKVResponse {
+  bytes value = 1;
+  uint64 version = 2;
+  google.protobuf.Timestamp updated_at = 3;
+}
+
+message PutKVRequest {
+  string key = 1;
+  bytes value = 2;
+}
+
+message PutKVResponse {
+  uint64 version = 1;
+  google.protobuf.Timestamp updated_at = 2;
+}
+
+// ========================================
+// Provider Service Messages
+// ========================================
+
+message InstallProviderRequest {
+  string provider_id = 1;
+  string version = 2;
+  string artifact_url = 3;
+  TrustTier trust_tier = 4;
+}
+
+message InstallProviderResponse {
+  bool success = 1;
+  string error = 2;
+  string installed_path = 3;
+}
+
+message StartProviderRequest {
+  string provider_id = 1;
+  string version = 2;
+  repeated string capabilities = 3;
+  map<string, string> config = 4;
+}
+
+message StartProviderResponse {
+  bool success = 1;
+  string error = 2;
+  string process_id = 3;
+}
+
+message StopProviderRequest {
+  string provider_id = 1;
+  bool force = 2;
+}
+
+message StopProviderResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message GrantCapabilityRequest {
+  string provider_id = 1;
+  string capability = 2;
+  map<string, string> config = 3;
+}
+
+message GrantCapabilityResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message RevokeCapabilityRequest {
+  string provider_id = 1;
+  string capability = 2;
+}
+
+message RevokeCapabilityResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ListProvidersRequest {
+  bool include_stopped = 1;
+}
+
+message ListProvidersResponse {
+  repeated ProviderInfo providers = 1;
+}
+
+message ProviderInfo {
+  string provider_id = 1;
+  string version = 2;
+  ProviderState state = 3;
+  TrustTier trust_tier = 4;
+  repeated string capabilities = 5;
+  google.protobuf.Timestamp installed_at = 6;
+  google.protobuf.Timestamp started_at = 7;
+}
+
+enum ProviderState {
+  PROVIDER_STATE_UNSPECIFIED = 0;
+  PROVIDER_STATE_INSTALLED = 1;
+  PROVIDER_STATE_STARTING = 2;
+  PROVIDER_STATE_RUNNING = 3;
+  PROVIDER_STATE_STOPPED = 4;
+  PROVIDER_STATE_FAILED = 5;
+}
+
+enum TrustTier {
+  TRUST_TIER_UNSPECIFIED = 0;
+  TRUST_TIER_VERIFIED = 1;
+  TRUST_TIER_TRUSTED = 2;
+  TRUST_TIER_SANDBOXED = 3;
+  TRUST_TIER_UNTRUSTED = 4;
+}
