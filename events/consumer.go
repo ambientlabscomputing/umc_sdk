@@ -1,5 +1,4 @@
 package events
-package events
 
 import (
 	"context"
@@ -21,169 +20,168 @@ type StreamClient interface {
 	Recv() (interface{}, error)
 }
 
+// ConsumerConfig holds consumer configuration
+type ConsumerConfig struct {
+	Name           string
+	DialFunc       func() (*grpc.ClientConn, error)
+	StreamFunc     func(*grpc.ClientConn) (StreamClient, error)
+	Handler        EventHandler
+	Logger         *slog.Logger
+	ReconnectDelay time.Duration
+	MaxReconnect   time.Duration
+}
+
 // Consumer manages event stream consumption with automatic reconnection
 type Consumer struct {
-	name            string
-	dialFunc        func() (*grpc.ClientConn, error)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}	return next	}		return c.maxReconnect	if next > c.maxReconnect {	next := current * 2func (c *Consumer) increaseBackoff(current time.Duration) time.Duration {// increaseBackoff increases the backoff duration with exponential backoff}	}	case <-time.After(d):	case <-c.ctx.Done():	select {func (c *Consumer) sleep(d time.Duration) {// sleep sleeps for the specified duration or until context is cancelled}	}		}			// Continue processing despite handler errors			c.logger.Error("handler error", "name", c.name, "error", err)		if err := c.handler(c.ctx, event); err != nil {		// Handle the event		}			return fmt.Errorf("recv error: %w", err)			}				}					return nil				if st.Code() == codes.Canceled {			if st, ok := status.FromError(err); ok {		if err != nil {		}			return nil			c.logger.Info("stream closed by server", "name", c.name)		if err == io.EOF {		event, err := stream.Recv()		}		default:			return c.ctx.Err()		case <-c.ctx.Done():		select {	for {func (c *Consumer) consumeStream(stream StreamClient) error {// consumeStream processes events from the stream}	}		backoff = c.increaseBackoff(backoff)		c.sleep(backoff)		c.logger.Warn("stream disconnected, reconnecting", "name", c.name)		conn.Close()		}			c.logger.Error("stream error", "name", c.name, "error", err)		if err := c.consumeStream(stream); err != nil {		// Consume events		backoff = c.reconnectDelay // Reset backoff on successful connection		c.logger.Info("event stream connected", "name", c.name)		}			continue			backoff = c.increaseBackoff(backoff)			c.sleep(backoff)			conn.Close()			c.logger.Error("failed to create stream", "name", c.name, "error", err)		if err != nil {		stream, err := c.streamFunc(conn)		// Create stream		}			continue			backoff = c.increaseBackoff(backoff)			c.sleep(backoff)			c.logger.Error("failed to dial", "name", c.name, "error", err)		if err != nil {		conn, err := c.dialFunc()		// Attempt connection		}		default:			return			c.logger.Info("consumer stopped", "name", c.name)		case <-c.ctx.Done():		select {	for {	backoff := c.reconnectDelayfunc (c *Consumer) consumeLoop() {// consumeLoop handles the reconnection logic}	return c.namefunc (c *Consumer) Name() string {// Name returns the consumer name}	return nil	c.cancel()	c.logger.Info("stopping event consumer", "name", c.name)func (c *Consumer) Stop() error {// Stop gracefully stops the consumer}	return nil	go c.consumeLoop()	c.logger.Info("starting event consumer", "name", c.name)func (c *Consumer) Start() error {// Start begins consuming events with automatic reconnection}	}		cancel:         cancel,		ctx:            ctx,		lastSeenSeq:    make(map[string]uint64),		maxReconnect:   cfg.MaxReconnect,		reconnectDelay: cfg.ReconnectDelay,		logger:         cfg.Logger,		handler:        cfg.Handler,		streamFunc:     cfg.StreamFunc,		dialFunc:       cfg.DialFunc,		name:           cfg.Name,	return &Consumer{	ctx, cancel := context.WithCancel(context.Background())	}		cfg.MaxReconnect = 60 * time.Second	if cfg.MaxReconnect == 0 {	}		cfg.ReconnectDelay = 1 * time.Second	if cfg.ReconnectDelay == 0 {	}		cfg.Logger = slog.Default()	if cfg.Logger == nil {func NewConsumer(cfg ConsumerConfig) *Consumer {// NewConsumer creates a new event consumer with reconnection}	MaxReconnect   time.Duration	ReconnectDelay time.Duration	Logger         *slog.Logger	Handler        EventHandler	StreamFunc     func(*grpc.ClientConn) (StreamClient, error)	DialFunc       func() (*grpc.ClientConn, error)	Name           stringtype ConsumerConfig struct {// ConsumerConfig holds consumer configuration}	cancel          context.CancelFunc	ctx             context.Context	lastSeenSeq     map[string]uint64	maxReconnect    time.Duration	reconnectDelay  time.Duration	logger          *slog.Logger	handler         EventHandler	streamFunc      func(*grpc.ClientConn) (StreamClient, error)
+	name           string
+	dialFunc       func() (*grpc.ClientConn, error)
+	streamFunc     func(*grpc.ClientConn) (StreamClient, error)
+	handler        EventHandler
+	logger         *slog.Logger
+	reconnectDelay time.Duration
+	maxReconnect   time.Duration
+	lastSeenSeq    map[string]uint64
+	ctx            context.Context
+	cancel         context.CancelFunc
+}
+
+// NewConsumer creates a new event consumer with reconnection
+func NewConsumer(cfg ConsumerConfig) *Consumer {
+	if cfg.Logger == nil {
+		cfg.Logger = slog.Default()
+	}
+	if cfg.ReconnectDelay == 0 {
+		cfg.ReconnectDelay = 1 * time.Second
+	}
+	if cfg.MaxReconnect == 0 {
+		cfg.MaxReconnect = 60 * time.Second
+	}
+
+	ctx, cancel := context.WithCancel(context.Background())
+
+	return &Consumer{
+		name:           cfg.Name,
+		dialFunc:       cfg.DialFunc,
+		streamFunc:     cfg.StreamFunc,
+		handler:        cfg.Handler,
+		logger:         cfg.Logger,
+		reconnectDelay: cfg.ReconnectDelay,
+		maxReconnect:   cfg.MaxReconnect,
+		lastSeenSeq:    make(map[string]uint64),
+		ctx:            ctx,
+		cancel:         cancel,
+	}
+}
+
+// Start begins consuming events with automatic reconnection
+func (c *Consumer) Start(_ context.Context) error {
+	c.logger.Info("starting event consumer", "name", c.name)
+	go c.consumeLoop()
+	return nil
+}
+
+// Stop gracefully stops the consumer
+func (c *Consumer) Stop(_ context.Context) error {
+	c.logger.Info("stopping event consumer", "name", c.name)
+	c.cancel()
+	return nil
+}
+
+// Name returns the consumer name
+func (c *Consumer) Name() string {
+	return c.name
+}
+
+// consumeLoop handles the reconnection logic
+func (c *Consumer) consumeLoop() {
+	backoff := c.reconnectDelay
+
+	for {
+		select {
+		case <-c.ctx.Done():
+			c.logger.Info("consumer stopped", "name", c.name)
+			return
+		default:
+		}
+
+		// Attempt connection
+		conn, err := c.dialFunc()
+		if err != nil {
+			c.logger.Error("failed to dial", "name", c.name, "error", err)
+			c.sleep(backoff)
+			backoff = c.increaseBackoff(backoff)
+			continue
+		}
+
+		// Create stream
+		stream, err := c.streamFunc(conn)
+		if err != nil {
+			c.logger.Error("failed to create stream", "name", c.name, "error", err)
+			conn.Close()
+			c.sleep(backoff)
+			backoff = c.increaseBackoff(backoff)
+			continue
+		}
+
+		// Consume events
+		c.logger.Info("event stream connected", "name", c.name)
+		backoff = c.reconnectDelay // Reset backoff on successful connection
+
+		if err := c.consumeStream(stream); err != nil {
+			c.logger.Error("stream error", "name", c.name, "error", err)
+		}
+
+		conn.Close()
+		c.logger.Warn("stream disconnected, reconnecting", "name", c.name)
+		c.sleep(backoff)
+		backoff = c.increaseBackoff(backoff)
+	}
+}
+
+// consumeStream processes events from the stream
+func (c *Consumer) consumeStream(stream StreamClient) error {
+	for {
+		select {
+		case <-c.ctx.Done():
+			return c.ctx.Err()
+		default:
+		}
+
+		event, err := stream.Recv()
+		if err == io.EOF {
+			c.logger.Info("stream closed by server", "name", c.name)
+			return nil
+		}
+		if err != nil {
+			if st, ok := status.FromError(err); ok {
+				if st.Code() == codes.Canceled {
+					return nil
+				}
+			}
+			return fmt.Errorf("recv error: %w", err)
+		}
+
+		// Handle the event
+		if err := c.handler(c.ctx, event); err != nil {
+			c.logger.Error("handler error", "name", c.name, "error", err)
+			// Continue processing despite handler errors
+		}
+	}
+}
+
+// sleep sleeps for the specified duration or until context is cancelled
+func (c *Consumer) sleep(d time.Duration) {
+	select {
+	case <-c.ctx.Done():
+	case <-time.After(d):
+	}
+}
+
+// increaseBackoff increases the backoff duration with exponential backoff
+func (c *Consumer) increaseBackoff(current time.Duration) time.Duration {
+	next := current * 2
+	if next > c.maxReconnect {
+		return c.maxReconnect
+	}
+	return next
+}
