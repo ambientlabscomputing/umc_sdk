@@ -1076,6 +1076,186 @@ func (x *InspectProcessResponse) GetHealthStatus() string {
 	return ""
 }
 
+type AllocateResourcesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProcessId     string                 `protobuf:"bytes,1,opt,name=process_id,json=processId,proto3" json:"process_id,omitempty"`
+	Limits        *ResourceLimits        `protobuf:"bytes,2,opt,name=limits,proto3" json:"limits,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AllocateResourcesRequest) Reset() {
+	*x = AllocateResourcesRequest{}
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AllocateResourcesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AllocateResourcesRequest) ProtoMessage() {}
+
+func (x *AllocateResourcesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AllocateResourcesRequest.ProtoReflect.Descriptor instead.
+func (*AllocateResourcesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AllocateResourcesRequest) GetProcessId() string {
+	if x != nil {
+		return x.ProcessId
+	}
+	return ""
+}
+
+func (x *AllocateResourcesRequest) GetLimits() *ResourceLimits {
+	if x != nil {
+		return x.Limits
+	}
+	return nil
+}
+
+type AllocateResourcesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AllocateResourcesResponse) Reset() {
+	*x = AllocateResourcesResponse{}
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AllocateResourcesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AllocateResourcesResponse) ProtoMessage() {}
+
+func (x *AllocateResourcesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AllocateResourcesResponse.ProtoReflect.Descriptor instead.
+func (*AllocateResourcesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *AllocateResourcesResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *AllocateResourcesResponse) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
+type ResourceLimits struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CpuMillicores uint64                 `protobuf:"varint,1,opt,name=cpu_millicores,json=cpuMillicores,proto3" json:"cpu_millicores,omitempty"` // CPU limit in millicores (1000 = 1 core)
+	MemoryBytes   uint64                 `protobuf:"varint,2,opt,name=memory_bytes,json=memoryBytes,proto3" json:"memory_bytes,omitempty"`       // Memory limit in bytes
+	DiskBytes     uint64                 `protobuf:"varint,3,opt,name=disk_bytes,json=diskBytes,proto3" json:"disk_bytes,omitempty"`             // Disk/storage limit in bytes
+	MaxProcesses  uint32                 `protobuf:"varint,4,opt,name=max_processes,json=maxProcesses,proto3" json:"max_processes,omitempty"`    // Maximum number of processes
+	MaxOpenFiles  uint32                 `protobuf:"varint,5,opt,name=max_open_files,json=maxOpenFiles,proto3" json:"max_open_files,omitempty"`  // Maximum number of open files
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceLimits) Reset() {
+	*x = ResourceLimits{}
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceLimits) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceLimits) ProtoMessage() {}
+
+func (x *ResourceLimits) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceLimits.ProtoReflect.Descriptor instead.
+func (*ResourceLimits) Descriptor() ([]byte, []int) {
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ResourceLimits) GetCpuMillicores() uint64 {
+	if x != nil {
+		return x.CpuMillicores
+	}
+	return 0
+}
+
+func (x *ResourceLimits) GetMemoryBytes() uint64 {
+	if x != nil {
+		return x.MemoryBytes
+	}
+	return 0
+}
+
+func (x *ResourceLimits) GetDiskBytes() uint64 {
+	if x != nil {
+		return x.DiskBytes
+	}
+	return 0
+}
+
+func (x *ResourceLimits) GetMaxProcesses() uint32 {
+	if x != nil {
+		return x.MaxProcesses
+	}
+	return 0
+}
+
+func (x *ResourceLimits) GetMaxOpenFiles() uint32 {
+	if x != nil {
+		return x.MaxOpenFiles
+	}
+	return 0
+}
+
 type GetNodeIdentityRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1084,7 +1264,7 @@ type GetNodeIdentityRequest struct {
 
 func (x *GetNodeIdentityRequest) Reset() {
 	*x = GetNodeIdentityRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[10]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1096,7 +1276,7 @@ func (x *GetNodeIdentityRequest) String() string {
 func (*GetNodeIdentityRequest) ProtoMessage() {}
 
 func (x *GetNodeIdentityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[10]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1109,7 +1289,7 @@ func (x *GetNodeIdentityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNodeIdentityRequest.ProtoReflect.Descriptor instead.
 func (*GetNodeIdentityRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{10}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{13}
 }
 
 type GetNodeIdentityResponse struct {
@@ -1125,7 +1305,7 @@ type GetNodeIdentityResponse struct {
 
 func (x *GetNodeIdentityResponse) Reset() {
 	*x = GetNodeIdentityResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[11]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1137,7 +1317,7 @@ func (x *GetNodeIdentityResponse) String() string {
 func (*GetNodeIdentityResponse) ProtoMessage() {}
 
 func (x *GetNodeIdentityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[11]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1150,7 +1330,7 @@ func (x *GetNodeIdentityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNodeIdentityResponse.ProtoReflect.Descriptor instead.
 func (*GetNodeIdentityResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{11}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetNodeIdentityResponse) GetNodeId() string {
@@ -1198,7 +1378,7 @@ type SignPayloadRequest struct {
 
 func (x *SignPayloadRequest) Reset() {
 	*x = SignPayloadRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[12]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1210,7 +1390,7 @@ func (x *SignPayloadRequest) String() string {
 func (*SignPayloadRequest) ProtoMessage() {}
 
 func (x *SignPayloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[12]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1223,7 +1403,7 @@ func (x *SignPayloadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignPayloadRequest.ProtoReflect.Descriptor instead.
 func (*SignPayloadRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{12}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SignPayloadRequest) GetPayload() []byte {
@@ -1250,7 +1430,7 @@ type SignPayloadResponse struct {
 
 func (x *SignPayloadResponse) Reset() {
 	*x = SignPayloadResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[13]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1262,7 +1442,7 @@ func (x *SignPayloadResponse) String() string {
 func (*SignPayloadResponse) ProtoMessage() {}
 
 func (x *SignPayloadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[13]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1275,7 +1455,7 @@ func (x *SignPayloadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignPayloadResponse.ProtoReflect.Descriptor instead.
 func (*SignPayloadResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{13}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SignPayloadResponse) GetSignature() []byte {
@@ -1303,7 +1483,7 @@ type VerifyTrustRequest struct {
 
 func (x *VerifyTrustRequest) Reset() {
 	*x = VerifyTrustRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[14]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1315,7 +1495,7 @@ func (x *VerifyTrustRequest) String() string {
 func (*VerifyTrustRequest) ProtoMessage() {}
 
 func (x *VerifyTrustRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[14]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1328,7 +1508,7 @@ func (x *VerifyTrustRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyTrustRequest.ProtoReflect.Descriptor instead.
 func (*VerifyTrustRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{14}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *VerifyTrustRequest) GetPayload() []byte {
@@ -1363,7 +1543,7 @@ type VerifyTrustResponse struct {
 
 func (x *VerifyTrustResponse) Reset() {
 	*x = VerifyTrustResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[15]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1375,7 +1555,7 @@ func (x *VerifyTrustResponse) String() string {
 func (*VerifyTrustResponse) ProtoMessage() {}
 
 func (x *VerifyTrustResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[15]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1388,7 +1568,7 @@ func (x *VerifyTrustResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyTrustResponse.ProtoReflect.Descriptor instead.
 func (*VerifyTrustResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{15}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *VerifyTrustResponse) GetTrusted() bool {
@@ -1424,7 +1604,7 @@ type IssueLocalCertificateRequest struct {
 
 func (x *IssueLocalCertificateRequest) Reset() {
 	*x = IssueLocalCertificateRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[16]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1436,7 +1616,7 @@ func (x *IssueLocalCertificateRequest) String() string {
 func (*IssueLocalCertificateRequest) ProtoMessage() {}
 
 func (x *IssueLocalCertificateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[16]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1449,7 +1629,7 @@ func (x *IssueLocalCertificateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IssueLocalCertificateRequest.ProtoReflect.Descriptor instead.
 func (*IssueLocalCertificateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{16}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *IssueLocalCertificateRequest) GetComponentName() string {
@@ -1491,7 +1671,7 @@ type IssueLocalCertificateResponse struct {
 
 func (x *IssueLocalCertificateResponse) Reset() {
 	*x = IssueLocalCertificateResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[17]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1503,7 +1683,7 @@ func (x *IssueLocalCertificateResponse) String() string {
 func (*IssueLocalCertificateResponse) ProtoMessage() {}
 
 func (x *IssueLocalCertificateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[17]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1516,7 +1696,7 @@ func (x *IssueLocalCertificateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IssueLocalCertificateResponse.ProtoReflect.Descriptor instead.
 func (*IssueLocalCertificateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{17}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *IssueLocalCertificateResponse) GetCertificatePem() string {
@@ -1551,7 +1731,7 @@ type StoreSecretRequest struct {
 
 func (x *StoreSecretRequest) Reset() {
 	*x = StoreSecretRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[18]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1563,7 +1743,7 @@ func (x *StoreSecretRequest) String() string {
 func (*StoreSecretRequest) ProtoMessage() {}
 
 func (x *StoreSecretRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[18]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1576,7 +1756,7 @@ func (x *StoreSecretRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StoreSecretRequest.ProtoReflect.Descriptor instead.
 func (*StoreSecretRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{18}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *StoreSecretRequest) GetKey() string {
@@ -1610,7 +1790,7 @@ type StoreSecretResponse struct {
 
 func (x *StoreSecretResponse) Reset() {
 	*x = StoreSecretResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[19]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1622,7 +1802,7 @@ func (x *StoreSecretResponse) String() string {
 func (*StoreSecretResponse) ProtoMessage() {}
 
 func (x *StoreSecretResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[19]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1635,7 +1815,7 @@ func (x *StoreSecretResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StoreSecretResponse.ProtoReflect.Descriptor instead.
 func (*StoreSecretResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{19}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *StoreSecretResponse) GetVersion() string {
@@ -1662,7 +1842,7 @@ type GetSecretRequest struct {
 
 func (x *GetSecretRequest) Reset() {
 	*x = GetSecretRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[20]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1674,7 +1854,7 @@ func (x *GetSecretRequest) String() string {
 func (*GetSecretRequest) ProtoMessage() {}
 
 func (x *GetSecretRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[20]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1687,7 +1867,7 @@ func (x *GetSecretRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSecretRequest.ProtoReflect.Descriptor instead.
 func (*GetSecretRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{20}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetSecretRequest) GetKey() string {
@@ -1716,7 +1896,7 @@ type GetSecretResponse struct {
 
 func (x *GetSecretResponse) Reset() {
 	*x = GetSecretResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[21]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1728,7 +1908,7 @@ func (x *GetSecretResponse) String() string {
 func (*GetSecretResponse) ProtoMessage() {}
 
 func (x *GetSecretResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[21]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1741,7 +1921,7 @@ func (x *GetSecretResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSecretResponse.ProtoReflect.Descriptor instead.
 func (*GetSecretResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{21}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GetSecretResponse) GetValue() []byte {
@@ -1783,7 +1963,7 @@ type MountSecretRequest struct {
 
 func (x *MountSecretRequest) Reset() {
 	*x = MountSecretRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[22]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1795,7 +1975,7 @@ func (x *MountSecretRequest) String() string {
 func (*MountSecretRequest) ProtoMessage() {}
 
 func (x *MountSecretRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[22]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1808,7 +1988,7 @@ func (x *MountSecretRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MountSecretRequest.ProtoReflect.Descriptor instead.
 func (*MountSecretRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{22}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *MountSecretRequest) GetKey() string {
@@ -1842,7 +2022,7 @@ type MountSecretResponse struct {
 
 func (x *MountSecretResponse) Reset() {
 	*x = MountSecretResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[23]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1854,7 +2034,7 @@ func (x *MountSecretResponse) String() string {
 func (*MountSecretResponse) ProtoMessage() {}
 
 func (x *MountSecretResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[23]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1867,7 +2047,7 @@ func (x *MountSecretResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MountSecretResponse.ProtoReflect.Descriptor instead.
 func (*MountSecretResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{23}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *MountSecretResponse) GetSuccess() bool {
@@ -1893,7 +2073,7 @@ type ListSecretsRequest struct {
 
 func (x *ListSecretsRequest) Reset() {
 	*x = ListSecretsRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[24]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1905,7 +2085,7 @@ func (x *ListSecretsRequest) String() string {
 func (*ListSecretsRequest) ProtoMessage() {}
 
 func (x *ListSecretsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[24]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1918,7 +2098,7 @@ func (x *ListSecretsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSecretsRequest.ProtoReflect.Descriptor instead.
 func (*ListSecretsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{24}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ListSecretsRequest) GetPrefix() string {
@@ -1937,7 +2117,7 @@ type ListSecretsResponse struct {
 
 func (x *ListSecretsResponse) Reset() {
 	*x = ListSecretsResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[25]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1949,7 +2129,7 @@ func (x *ListSecretsResponse) String() string {
 func (*ListSecretsResponse) ProtoMessage() {}
 
 func (x *ListSecretsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[25]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1962,7 +2142,7 @@ func (x *ListSecretsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSecretsResponse.ProtoReflect.Descriptor instead.
 func (*ListSecretsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{25}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListSecretsResponse) GetSecrets() []*SecretMetadata {
@@ -1984,7 +2164,7 @@ type SecretMetadata struct {
 
 func (x *SecretMetadata) Reset() {
 	*x = SecretMetadata{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[26]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1996,7 +2176,7 @@ func (x *SecretMetadata) String() string {
 func (*SecretMetadata) ProtoMessage() {}
 
 func (x *SecretMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[26]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2009,7 +2189,7 @@ func (x *SecretMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SecretMetadata.ProtoReflect.Descriptor instead.
 func (*SecretMetadata) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{26}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *SecretMetadata) GetKey() string {
@@ -2048,7 +2228,7 @@ type GetClusterStateRequest struct {
 
 func (x *GetClusterStateRequest) Reset() {
 	*x = GetClusterStateRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[27]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2060,7 +2240,7 @@ func (x *GetClusterStateRequest) String() string {
 func (*GetClusterStateRequest) ProtoMessage() {}
 
 func (x *GetClusterStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[27]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2073,7 +2253,7 @@ func (x *GetClusterStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetClusterStateRequest.ProtoReflect.Descriptor instead.
 func (*GetClusterStateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{27}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{30}
 }
 
 type GetClusterStateResponse struct {
@@ -2090,7 +2270,7 @@ type GetClusterStateResponse struct {
 
 func (x *GetClusterStateResponse) Reset() {
 	*x = GetClusterStateResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[28]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2102,7 +2282,7 @@ func (x *GetClusterStateResponse) String() string {
 func (*GetClusterStateResponse) ProtoMessage() {}
 
 func (x *GetClusterStateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[28]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2115,7 +2295,7 @@ func (x *GetClusterStateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetClusterStateResponse.ProtoReflect.Descriptor instead.
 func (*GetClusterStateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{28}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetClusterStateResponse) GetClusterId() string {
@@ -2173,7 +2353,7 @@ type NodeInfo struct {
 
 func (x *NodeInfo) Reset() {
 	*x = NodeInfo{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[29]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2185,7 +2365,7 @@ func (x *NodeInfo) String() string {
 func (*NodeInfo) ProtoMessage() {}
 
 func (x *NodeInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[29]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2198,7 +2378,7 @@ func (x *NodeInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeInfo.ProtoReflect.Descriptor instead.
 func (*NodeInfo) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{29}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *NodeInfo) GetNodeId() string {
@@ -2246,7 +2426,7 @@ type ProposeClusterConfigRequest struct {
 
 func (x *ProposeClusterConfigRequest) Reset() {
 	*x = ProposeClusterConfigRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[30]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2258,7 +2438,7 @@ func (x *ProposeClusterConfigRequest) String() string {
 func (*ProposeClusterConfigRequest) ProtoMessage() {}
 
 func (x *ProposeClusterConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[30]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2271,7 +2451,7 @@ func (x *ProposeClusterConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProposeClusterConfigRequest.ProtoReflect.Descriptor instead.
 func (*ProposeClusterConfigRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{30}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ProposeClusterConfigRequest) GetNodes() []*NodeInfo {
@@ -2299,7 +2479,7 @@ type ProposeClusterConfigResponse struct {
 
 func (x *ProposeClusterConfigResponse) Reset() {
 	*x = ProposeClusterConfigResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[31]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2311,7 +2491,7 @@ func (x *ProposeClusterConfigResponse) String() string {
 func (*ProposeClusterConfigResponse) ProtoMessage() {}
 
 func (x *ProposeClusterConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[31]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2324,7 +2504,7 @@ func (x *ProposeClusterConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProposeClusterConfigResponse.ProtoReflect.Descriptor instead.
 func (*ProposeClusterConfigResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{31}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ProposeClusterConfigResponse) GetAccepted() bool {
@@ -2352,13 +2532,14 @@ type JoinClusterRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	JoinToken     string                 `protobuf:"bytes,1,opt,name=join_token,json=joinToken,proto3" json:"join_token,omitempty"`
 	NodeAddress   string                 `protobuf:"bytes,2,opt,name=node_address,json=nodeAddress,proto3" json:"node_address,omitempty"`
+	NodeId        string                 `protobuf:"bytes,3,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *JoinClusterRequest) Reset() {
 	*x = JoinClusterRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[32]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2370,7 +2551,7 @@ func (x *JoinClusterRequest) String() string {
 func (*JoinClusterRequest) ProtoMessage() {}
 
 func (x *JoinClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[32]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2383,7 +2564,7 @@ func (x *JoinClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinClusterRequest.ProtoReflect.Descriptor instead.
 func (*JoinClusterRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{32}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *JoinClusterRequest) GetJoinToken() string {
@@ -2400,6 +2581,13 @@ func (x *JoinClusterRequest) GetNodeAddress() string {
 	return ""
 }
 
+func (x *JoinClusterRequest) GetNodeId() string {
+	if x != nil {
+		return x.NodeId
+	}
+	return ""
+}
+
 type JoinClusterResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
@@ -2411,7 +2599,7 @@ type JoinClusterResponse struct {
 
 func (x *JoinClusterResponse) Reset() {
 	*x = JoinClusterResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[33]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2423,7 +2611,7 @@ func (x *JoinClusterResponse) String() string {
 func (*JoinClusterResponse) ProtoMessage() {}
 
 func (x *JoinClusterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[33]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2436,7 +2624,7 @@ func (x *JoinClusterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinClusterResponse.ProtoReflect.Descriptor instead.
 func (*JoinClusterResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{33}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *JoinClusterResponse) GetSuccess() bool {
@@ -2469,7 +2657,7 @@ type GetKVRequest struct {
 
 func (x *GetKVRequest) Reset() {
 	*x = GetKVRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[34]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2481,7 +2669,7 @@ func (x *GetKVRequest) String() string {
 func (*GetKVRequest) ProtoMessage() {}
 
 func (x *GetKVRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[34]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2494,7 +2682,7 @@ func (x *GetKVRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKVRequest.ProtoReflect.Descriptor instead.
 func (*GetKVRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{34}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GetKVRequest) GetKey() string {
@@ -2515,7 +2703,7 @@ type GetKVResponse struct {
 
 func (x *GetKVResponse) Reset() {
 	*x = GetKVResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[35]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2527,7 +2715,7 @@ func (x *GetKVResponse) String() string {
 func (*GetKVResponse) ProtoMessage() {}
 
 func (x *GetKVResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[35]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2540,7 +2728,7 @@ func (x *GetKVResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKVResponse.ProtoReflect.Descriptor instead.
 func (*GetKVResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{35}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GetKVResponse) GetValue() []byte {
@@ -2574,7 +2762,7 @@ type PutKVRequest struct {
 
 func (x *PutKVRequest) Reset() {
 	*x = PutKVRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[36]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2586,7 +2774,7 @@ func (x *PutKVRequest) String() string {
 func (*PutKVRequest) ProtoMessage() {}
 
 func (x *PutKVRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[36]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2599,7 +2787,7 @@ func (x *PutKVRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PutKVRequest.ProtoReflect.Descriptor instead.
 func (*PutKVRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{36}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *PutKVRequest) GetKey() string {
@@ -2626,7 +2814,7 @@ type PutKVResponse struct {
 
 func (x *PutKVResponse) Reset() {
 	*x = PutKVResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[37]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2638,7 +2826,7 @@ func (x *PutKVResponse) String() string {
 func (*PutKVResponse) ProtoMessage() {}
 
 func (x *PutKVResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[37]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2651,7 +2839,7 @@ func (x *PutKVResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PutKVResponse.ProtoReflect.Descriptor instead.
 func (*PutKVResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{37}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *PutKVResponse) GetVersion() uint64 {
@@ -2680,7 +2868,7 @@ type InstallProviderRequest struct {
 
 func (x *InstallProviderRequest) Reset() {
 	*x = InstallProviderRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[38]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2692,7 +2880,7 @@ func (x *InstallProviderRequest) String() string {
 func (*InstallProviderRequest) ProtoMessage() {}
 
 func (x *InstallProviderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[38]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2705,7 +2893,7 @@ func (x *InstallProviderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InstallProviderRequest.ProtoReflect.Descriptor instead.
 func (*InstallProviderRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{38}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *InstallProviderRequest) GetProviderId() string {
@@ -2747,7 +2935,7 @@ type InstallProviderResponse struct {
 
 func (x *InstallProviderResponse) Reset() {
 	*x = InstallProviderResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[39]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2759,7 +2947,7 @@ func (x *InstallProviderResponse) String() string {
 func (*InstallProviderResponse) ProtoMessage() {}
 
 func (x *InstallProviderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[39]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2772,7 +2960,7 @@ func (x *InstallProviderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InstallProviderResponse.ProtoReflect.Descriptor instead.
 func (*InstallProviderResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{39}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *InstallProviderResponse) GetSuccess() bool {
@@ -2808,7 +2996,7 @@ type StartProviderRequest struct {
 
 func (x *StartProviderRequest) Reset() {
 	*x = StartProviderRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[40]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2820,7 +3008,7 @@ func (x *StartProviderRequest) String() string {
 func (*StartProviderRequest) ProtoMessage() {}
 
 func (x *StartProviderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[40]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2833,7 +3021,7 @@ func (x *StartProviderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartProviderRequest.ProtoReflect.Descriptor instead.
 func (*StartProviderRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{40}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *StartProviderRequest) GetProviderId() string {
@@ -2875,7 +3063,7 @@ type StartProviderResponse struct {
 
 func (x *StartProviderResponse) Reset() {
 	*x = StartProviderResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[41]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2887,7 +3075,7 @@ func (x *StartProviderResponse) String() string {
 func (*StartProviderResponse) ProtoMessage() {}
 
 func (x *StartProviderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[41]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2900,7 +3088,7 @@ func (x *StartProviderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartProviderResponse.ProtoReflect.Descriptor instead.
 func (*StartProviderResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{41}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *StartProviderResponse) GetSuccess() bool {
@@ -2934,7 +3122,7 @@ type StopProviderRequest struct {
 
 func (x *StopProviderRequest) Reset() {
 	*x = StopProviderRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[42]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2946,7 +3134,7 @@ func (x *StopProviderRequest) String() string {
 func (*StopProviderRequest) ProtoMessage() {}
 
 func (x *StopProviderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[42]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2959,7 +3147,7 @@ func (x *StopProviderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopProviderRequest.ProtoReflect.Descriptor instead.
 func (*StopProviderRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{42}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *StopProviderRequest) GetProviderId() string {
@@ -2986,7 +3174,7 @@ type StopProviderResponse struct {
 
 func (x *StopProviderResponse) Reset() {
 	*x = StopProviderResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[43]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2998,7 +3186,7 @@ func (x *StopProviderResponse) String() string {
 func (*StopProviderResponse) ProtoMessage() {}
 
 func (x *StopProviderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[43]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3011,7 +3199,7 @@ func (x *StopProviderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopProviderResponse.ProtoReflect.Descriptor instead.
 func (*StopProviderResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{43}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *StopProviderResponse) GetSuccess() bool {
@@ -3039,7 +3227,7 @@ type GrantCapabilityRequest struct {
 
 func (x *GrantCapabilityRequest) Reset() {
 	*x = GrantCapabilityRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[44]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3051,7 +3239,7 @@ func (x *GrantCapabilityRequest) String() string {
 func (*GrantCapabilityRequest) ProtoMessage() {}
 
 func (x *GrantCapabilityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[44]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3064,7 +3252,7 @@ func (x *GrantCapabilityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrantCapabilityRequest.ProtoReflect.Descriptor instead.
 func (*GrantCapabilityRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{44}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *GrantCapabilityRequest) GetProviderId() string {
@@ -3098,7 +3286,7 @@ type GrantCapabilityResponse struct {
 
 func (x *GrantCapabilityResponse) Reset() {
 	*x = GrantCapabilityResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[45]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3110,7 +3298,7 @@ func (x *GrantCapabilityResponse) String() string {
 func (*GrantCapabilityResponse) ProtoMessage() {}
 
 func (x *GrantCapabilityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[45]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3123,7 +3311,7 @@ func (x *GrantCapabilityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrantCapabilityResponse.ProtoReflect.Descriptor instead.
 func (*GrantCapabilityResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{45}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *GrantCapabilityResponse) GetSuccess() bool {
@@ -3150,7 +3338,7 @@ type RevokeCapabilityRequest struct {
 
 func (x *RevokeCapabilityRequest) Reset() {
 	*x = RevokeCapabilityRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[46]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3162,7 +3350,7 @@ func (x *RevokeCapabilityRequest) String() string {
 func (*RevokeCapabilityRequest) ProtoMessage() {}
 
 func (x *RevokeCapabilityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[46]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3175,7 +3363,7 @@ func (x *RevokeCapabilityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeCapabilityRequest.ProtoReflect.Descriptor instead.
 func (*RevokeCapabilityRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{46}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *RevokeCapabilityRequest) GetProviderId() string {
@@ -3202,7 +3390,7 @@ type RevokeCapabilityResponse struct {
 
 func (x *RevokeCapabilityResponse) Reset() {
 	*x = RevokeCapabilityResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[47]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3214,7 +3402,7 @@ func (x *RevokeCapabilityResponse) String() string {
 func (*RevokeCapabilityResponse) ProtoMessage() {}
 
 func (x *RevokeCapabilityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[47]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3227,7 +3415,7 @@ func (x *RevokeCapabilityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeCapabilityResponse.ProtoReflect.Descriptor instead.
 func (*RevokeCapabilityResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{47}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *RevokeCapabilityResponse) GetSuccess() bool {
@@ -3253,7 +3441,7 @@ type ListProvidersRequest struct {
 
 func (x *ListProvidersRequest) Reset() {
 	*x = ListProvidersRequest{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[48]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3265,7 +3453,7 @@ func (x *ListProvidersRequest) String() string {
 func (*ListProvidersRequest) ProtoMessage() {}
 
 func (x *ListProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[48]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3278,7 +3466,7 @@ func (x *ListProvidersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProvidersRequest.ProtoReflect.Descriptor instead.
 func (*ListProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{48}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *ListProvidersRequest) GetIncludeStopped() bool {
@@ -3297,7 +3485,7 @@ type ListProvidersResponse struct {
 
 func (x *ListProvidersResponse) Reset() {
 	*x = ListProvidersResponse{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[49]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3309,7 +3497,7 @@ func (x *ListProvidersResponse) String() string {
 func (*ListProvidersResponse) ProtoMessage() {}
 
 func (x *ListProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[49]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3322,7 +3510,7 @@ func (x *ListProvidersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProvidersResponse.ProtoReflect.Descriptor instead.
 func (*ListProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{49}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *ListProvidersResponse) GetProviders() []*ProviderInfo {
@@ -3347,7 +3535,7 @@ type ProviderInfo struct {
 
 func (x *ProviderInfo) Reset() {
 	*x = ProviderInfo{}
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[50]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3359,7 +3547,7 @@ func (x *ProviderInfo) String() string {
 func (*ProviderInfo) ProtoMessage() {}
 
 func (x *ProviderInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[50]
+	mi := &file_proto_ua_kernel_v1_syscall_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3372,7 +3560,7 @@ func (x *ProviderInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProviderInfo.ProtoReflect.Descriptor instead.
 func (*ProviderInfo) Descriptor() ([]byte, []int) {
-	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{50}
+	return file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *ProviderInfo) GetProviderId() string {
@@ -3505,7 +3693,21 @@ const file_proto_ua_kernel_v1_syscall_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x12#\n" +
 	"\rrestart_count\x18\x05 \x01(\x04R\frestartCount\x12#\n" +
-	"\rhealth_status\x18\x06 \x01(\tR\fhealthStatus\"\x18\n" +
+	"\rhealth_status\x18\x06 \x01(\tR\fhealthStatus\"o\n" +
+	"\x18AllocateResourcesRequest\x12\x1d\n" +
+	"\n" +
+	"process_id\x18\x01 \x01(\tR\tprocessId\x124\n" +
+	"\x06limits\x18\x02 \x01(\v2\x1c.ua_kernel.v1.ResourceLimitsR\x06limits\"K\n" +
+	"\x19AllocateResourcesResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xc4\x01\n" +
+	"\x0eResourceLimits\x12%\n" +
+	"\x0ecpu_millicores\x18\x01 \x01(\x04R\rcpuMillicores\x12!\n" +
+	"\fmemory_bytes\x18\x02 \x01(\x04R\vmemoryBytes\x12\x1d\n" +
+	"\n" +
+	"disk_bytes\x18\x03 \x01(\x04R\tdiskBytes\x12#\n" +
+	"\rmax_processes\x18\x04 \x01(\rR\fmaxProcesses\x12$\n" +
+	"\x0emax_open_files\x18\x05 \x01(\rR\fmaxOpenFiles\"\x18\n" +
 	"\x16GetNodeIdentityRequest\"\xc2\x01\n" +
 	"\x17GetNodeIdentityResponse\x12\x17\n" +
 	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12\x15\n" +
@@ -3605,11 +3807,12 @@ const file_proto_ua_kernel_v1_syscall_proto_rawDesc = "" +
 	"\x1cProposeClusterConfigResponse\x12\x1a\n" +
 	"\baccepted\x18\x01 \x01(\bR\baccepted\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12#\n" +
-	"\rapplied_index\x18\x03 \x01(\x04R\fappliedIndex\"V\n" +
+	"\rapplied_index\x18\x03 \x01(\x04R\fappliedIndex\"o\n" +
 	"\x12JoinClusterRequest\x12\x1d\n" +
 	"\n" +
 	"join_token\x18\x01 \x01(\tR\tjoinToken\x12!\n" +
-	"\fnode_address\x18\x02 \x01(\tR\vnodeAddress\"d\n" +
+	"\fnode_address\x18\x02 \x01(\tR\vnodeAddress\x12\x17\n" +
+	"\anode_id\x18\x03 \x01(\tR\x06nodeId\"d\n" +
 	"\x13JoinClusterResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12\x1d\n" +
@@ -3737,12 +3940,13 @@ const file_proto_ua_kernel_v1_syscall_proto_rawDesc = "" +
 	"\x14TRUST_TIER_UNTRUSTED\x10\x042\xaf\x01\n" +
 	"\fEventService\x12L\n" +
 	"\tEmitEvent\x12\x1e.ua_kernel.v1.EmitEventRequest\x1a\x1f.ua_kernel.v1.EmitEventResponse\x12Q\n" +
-	"\x0eSubscribeLocal\x12#.ua_kernel.v1.SubscribeLocalRequest\x1a\x18.ua_kernel.v1.LocalEvent0\x012\x8f\x02\n" +
+	"\x0eSubscribeLocal\x12#.ua_kernel.v1.SubscribeLocalRequest\x1a\x18.ua_kernel.v1.LocalEvent0\x012\xf5\x02\n" +
 	"\vExecService\x12O\n" +
 	"\n" +
 	"RunProcess\x12\x1f.ua_kernel.v1.RunProcessRequest\x1a .ua_kernel.v1.RunProcessResponse\x12R\n" +
 	"\vStopProcess\x12 .ua_kernel.v1.StopProcessRequest\x1a!.ua_kernel.v1.StopProcessResponse\x12[\n" +
-	"\x0eInspectProcess\x12#.ua_kernel.v1.InspectProcessRequest\x1a$.ua_kernel.v1.InspectProcessResponse2\x8b\x03\n" +
+	"\x0eInspectProcess\x12#.ua_kernel.v1.InspectProcessRequest\x1a$.ua_kernel.v1.InspectProcessResponse\x12d\n" +
+	"\x11AllocateResources\x12&.ua_kernel.v1.AllocateResourcesRequest\x1a'.ua_kernel.v1.AllocateResourcesResponse2\x8b\x03\n" +
 	"\x0fIdentityService\x12^\n" +
 	"\x0fGetNodeIdentity\x12$.ua_kernel.v1.GetNodeIdentityRequest\x1a%.ua_kernel.v1.GetNodeIdentityResponse\x12R\n" +
 	"\vSignPayload\x12 .ua_kernel.v1.SignPayloadRequest\x1a!.ua_kernel.v1.SignPayloadResponse\x12R\n" +
@@ -3780,7 +3984,7 @@ func file_proto_ua_kernel_v1_syscall_proto_rawDescGZIP() []byte {
 }
 
 var file_proto_ua_kernel_v1_syscall_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_proto_ua_kernel_v1_syscall_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
+var file_proto_ua_kernel_v1_syscall_proto_msgTypes = make([]protoimpl.MessageInfo, 61)
 var file_proto_ua_kernel_v1_syscall_proto_goTypes = []any{
 	(ProcessState)(0),                     // 0: ua_kernel.v1.ProcessState
 	(NodeRole)(0),                         // 1: ua_kernel.v1.NodeRole
@@ -3798,143 +4002,149 @@ var file_proto_ua_kernel_v1_syscall_proto_goTypes = []any{
 	(*StopProcessResponse)(nil),           // 13: ua_kernel.v1.StopProcessResponse
 	(*InspectProcessRequest)(nil),         // 14: ua_kernel.v1.InspectProcessRequest
 	(*InspectProcessResponse)(nil),        // 15: ua_kernel.v1.InspectProcessResponse
-	(*GetNodeIdentityRequest)(nil),        // 16: ua_kernel.v1.GetNodeIdentityRequest
-	(*GetNodeIdentityResponse)(nil),       // 17: ua_kernel.v1.GetNodeIdentityResponse
-	(*SignPayloadRequest)(nil),            // 18: ua_kernel.v1.SignPayloadRequest
-	(*SignPayloadResponse)(nil),           // 19: ua_kernel.v1.SignPayloadResponse
-	(*VerifyTrustRequest)(nil),            // 20: ua_kernel.v1.VerifyTrustRequest
-	(*VerifyTrustResponse)(nil),           // 21: ua_kernel.v1.VerifyTrustResponse
-	(*IssueLocalCertificateRequest)(nil),  // 22: ua_kernel.v1.IssueLocalCertificateRequest
-	(*IssueLocalCertificateResponse)(nil), // 23: ua_kernel.v1.IssueLocalCertificateResponse
-	(*StoreSecretRequest)(nil),            // 24: ua_kernel.v1.StoreSecretRequest
-	(*StoreSecretResponse)(nil),           // 25: ua_kernel.v1.StoreSecretResponse
-	(*GetSecretRequest)(nil),              // 26: ua_kernel.v1.GetSecretRequest
-	(*GetSecretResponse)(nil),             // 27: ua_kernel.v1.GetSecretResponse
-	(*MountSecretRequest)(nil),            // 28: ua_kernel.v1.MountSecretRequest
-	(*MountSecretResponse)(nil),           // 29: ua_kernel.v1.MountSecretResponse
-	(*ListSecretsRequest)(nil),            // 30: ua_kernel.v1.ListSecretsRequest
-	(*ListSecretsResponse)(nil),           // 31: ua_kernel.v1.ListSecretsResponse
-	(*SecretMetadata)(nil),                // 32: ua_kernel.v1.SecretMetadata
-	(*GetClusterStateRequest)(nil),        // 33: ua_kernel.v1.GetClusterStateRequest
-	(*GetClusterStateResponse)(nil),       // 34: ua_kernel.v1.GetClusterStateResponse
-	(*NodeInfo)(nil),                      // 35: ua_kernel.v1.NodeInfo
-	(*ProposeClusterConfigRequest)(nil),   // 36: ua_kernel.v1.ProposeClusterConfigRequest
-	(*ProposeClusterConfigResponse)(nil),  // 37: ua_kernel.v1.ProposeClusterConfigResponse
-	(*JoinClusterRequest)(nil),            // 38: ua_kernel.v1.JoinClusterRequest
-	(*JoinClusterResponse)(nil),           // 39: ua_kernel.v1.JoinClusterResponse
-	(*GetKVRequest)(nil),                  // 40: ua_kernel.v1.GetKVRequest
-	(*GetKVResponse)(nil),                 // 41: ua_kernel.v1.GetKVResponse
-	(*PutKVRequest)(nil),                  // 42: ua_kernel.v1.PutKVRequest
-	(*PutKVResponse)(nil),                 // 43: ua_kernel.v1.PutKVResponse
-	(*InstallProviderRequest)(nil),        // 44: ua_kernel.v1.InstallProviderRequest
-	(*InstallProviderResponse)(nil),       // 45: ua_kernel.v1.InstallProviderResponse
-	(*StartProviderRequest)(nil),          // 46: ua_kernel.v1.StartProviderRequest
-	(*StartProviderResponse)(nil),         // 47: ua_kernel.v1.StartProviderResponse
-	(*StopProviderRequest)(nil),           // 48: ua_kernel.v1.StopProviderRequest
-	(*StopProviderResponse)(nil),          // 49: ua_kernel.v1.StopProviderResponse
-	(*GrantCapabilityRequest)(nil),        // 50: ua_kernel.v1.GrantCapabilityRequest
-	(*GrantCapabilityResponse)(nil),       // 51: ua_kernel.v1.GrantCapabilityResponse
-	(*RevokeCapabilityRequest)(nil),       // 52: ua_kernel.v1.RevokeCapabilityRequest
-	(*RevokeCapabilityResponse)(nil),      // 53: ua_kernel.v1.RevokeCapabilityResponse
-	(*ListProvidersRequest)(nil),          // 54: ua_kernel.v1.ListProvidersRequest
-	(*ListProvidersResponse)(nil),         // 55: ua_kernel.v1.ListProvidersResponse
-	(*ProviderInfo)(nil),                  // 56: ua_kernel.v1.ProviderInfo
-	nil,                                   // 57: ua_kernel.v1.SubscribeLocalRequest.LastSeenSeqEntry
-	nil,                                   // 58: ua_kernel.v1.RunProcessRequest.EnvEntry
-	nil,                                   // 59: ua_kernel.v1.StoreSecretRequest.MetadataEntry
-	nil,                                   // 60: ua_kernel.v1.GetSecretResponse.MetadataEntry
-	nil,                                   // 61: ua_kernel.v1.SecretMetadata.MetadataEntry
-	nil,                                   // 62: ua_kernel.v1.StartProviderRequest.ConfigEntry
-	nil,                                   // 63: ua_kernel.v1.GrantCapabilityRequest.ConfigEntry
-	(*structpb.Struct)(nil),               // 64: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),         // 65: google.protobuf.Timestamp
+	(*AllocateResourcesRequest)(nil),      // 16: ua_kernel.v1.AllocateResourcesRequest
+	(*AllocateResourcesResponse)(nil),     // 17: ua_kernel.v1.AllocateResourcesResponse
+	(*ResourceLimits)(nil),                // 18: ua_kernel.v1.ResourceLimits
+	(*GetNodeIdentityRequest)(nil),        // 19: ua_kernel.v1.GetNodeIdentityRequest
+	(*GetNodeIdentityResponse)(nil),       // 20: ua_kernel.v1.GetNodeIdentityResponse
+	(*SignPayloadRequest)(nil),            // 21: ua_kernel.v1.SignPayloadRequest
+	(*SignPayloadResponse)(nil),           // 22: ua_kernel.v1.SignPayloadResponse
+	(*VerifyTrustRequest)(nil),            // 23: ua_kernel.v1.VerifyTrustRequest
+	(*VerifyTrustResponse)(nil),           // 24: ua_kernel.v1.VerifyTrustResponse
+	(*IssueLocalCertificateRequest)(nil),  // 25: ua_kernel.v1.IssueLocalCertificateRequest
+	(*IssueLocalCertificateResponse)(nil), // 26: ua_kernel.v1.IssueLocalCertificateResponse
+	(*StoreSecretRequest)(nil),            // 27: ua_kernel.v1.StoreSecretRequest
+	(*StoreSecretResponse)(nil),           // 28: ua_kernel.v1.StoreSecretResponse
+	(*GetSecretRequest)(nil),              // 29: ua_kernel.v1.GetSecretRequest
+	(*GetSecretResponse)(nil),             // 30: ua_kernel.v1.GetSecretResponse
+	(*MountSecretRequest)(nil),            // 31: ua_kernel.v1.MountSecretRequest
+	(*MountSecretResponse)(nil),           // 32: ua_kernel.v1.MountSecretResponse
+	(*ListSecretsRequest)(nil),            // 33: ua_kernel.v1.ListSecretsRequest
+	(*ListSecretsResponse)(nil),           // 34: ua_kernel.v1.ListSecretsResponse
+	(*SecretMetadata)(nil),                // 35: ua_kernel.v1.SecretMetadata
+	(*GetClusterStateRequest)(nil),        // 36: ua_kernel.v1.GetClusterStateRequest
+	(*GetClusterStateResponse)(nil),       // 37: ua_kernel.v1.GetClusterStateResponse
+	(*NodeInfo)(nil),                      // 38: ua_kernel.v1.NodeInfo
+	(*ProposeClusterConfigRequest)(nil),   // 39: ua_kernel.v1.ProposeClusterConfigRequest
+	(*ProposeClusterConfigResponse)(nil),  // 40: ua_kernel.v1.ProposeClusterConfigResponse
+	(*JoinClusterRequest)(nil),            // 41: ua_kernel.v1.JoinClusterRequest
+	(*JoinClusterResponse)(nil),           // 42: ua_kernel.v1.JoinClusterResponse
+	(*GetKVRequest)(nil),                  // 43: ua_kernel.v1.GetKVRequest
+	(*GetKVResponse)(nil),                 // 44: ua_kernel.v1.GetKVResponse
+	(*PutKVRequest)(nil),                  // 45: ua_kernel.v1.PutKVRequest
+	(*PutKVResponse)(nil),                 // 46: ua_kernel.v1.PutKVResponse
+	(*InstallProviderRequest)(nil),        // 47: ua_kernel.v1.InstallProviderRequest
+	(*InstallProviderResponse)(nil),       // 48: ua_kernel.v1.InstallProviderResponse
+	(*StartProviderRequest)(nil),          // 49: ua_kernel.v1.StartProviderRequest
+	(*StartProviderResponse)(nil),         // 50: ua_kernel.v1.StartProviderResponse
+	(*StopProviderRequest)(nil),           // 51: ua_kernel.v1.StopProviderRequest
+	(*StopProviderResponse)(nil),          // 52: ua_kernel.v1.StopProviderResponse
+	(*GrantCapabilityRequest)(nil),        // 53: ua_kernel.v1.GrantCapabilityRequest
+	(*GrantCapabilityResponse)(nil),       // 54: ua_kernel.v1.GrantCapabilityResponse
+	(*RevokeCapabilityRequest)(nil),       // 55: ua_kernel.v1.RevokeCapabilityRequest
+	(*RevokeCapabilityResponse)(nil),      // 56: ua_kernel.v1.RevokeCapabilityResponse
+	(*ListProvidersRequest)(nil),          // 57: ua_kernel.v1.ListProvidersRequest
+	(*ListProvidersResponse)(nil),         // 58: ua_kernel.v1.ListProvidersResponse
+	(*ProviderInfo)(nil),                  // 59: ua_kernel.v1.ProviderInfo
+	nil,                                   // 60: ua_kernel.v1.SubscribeLocalRequest.LastSeenSeqEntry
+	nil,                                   // 61: ua_kernel.v1.RunProcessRequest.EnvEntry
+	nil,                                   // 62: ua_kernel.v1.StoreSecretRequest.MetadataEntry
+	nil,                                   // 63: ua_kernel.v1.GetSecretResponse.MetadataEntry
+	nil,                                   // 64: ua_kernel.v1.SecretMetadata.MetadataEntry
+	nil,                                   // 65: ua_kernel.v1.StartProviderRequest.ConfigEntry
+	nil,                                   // 66: ua_kernel.v1.GrantCapabilityRequest.ConfigEntry
+	(*structpb.Struct)(nil),               // 67: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),         // 68: google.protobuf.Timestamp
 }
 var file_proto_ua_kernel_v1_syscall_proto_depIdxs = []int32{
-	64, // 0: ua_kernel.v1.EmitEventRequest.payload:type_name -> google.protobuf.Struct
-	65, // 1: ua_kernel.v1.EmitEventResponse.emitted_at:type_name -> google.protobuf.Timestamp
-	57, // 2: ua_kernel.v1.SubscribeLocalRequest.last_seen_seq:type_name -> ua_kernel.v1.SubscribeLocalRequest.LastSeenSeqEntry
-	65, // 3: ua_kernel.v1.LocalEvent.emitted_at:type_name -> google.protobuf.Timestamp
-	64, // 4: ua_kernel.v1.LocalEvent.payload:type_name -> google.protobuf.Struct
-	58, // 5: ua_kernel.v1.RunProcessRequest.env:type_name -> ua_kernel.v1.RunProcessRequest.EnvEntry
+	67, // 0: ua_kernel.v1.EmitEventRequest.payload:type_name -> google.protobuf.Struct
+	68, // 1: ua_kernel.v1.EmitEventResponse.emitted_at:type_name -> google.protobuf.Timestamp
+	60, // 2: ua_kernel.v1.SubscribeLocalRequest.last_seen_seq:type_name -> ua_kernel.v1.SubscribeLocalRequest.LastSeenSeqEntry
+	68, // 3: ua_kernel.v1.LocalEvent.emitted_at:type_name -> google.protobuf.Timestamp
+	67, // 4: ua_kernel.v1.LocalEvent.payload:type_name -> google.protobuf.Struct
+	61, // 5: ua_kernel.v1.RunProcessRequest.env:type_name -> ua_kernel.v1.RunProcessRequest.EnvEntry
 	0,  // 6: ua_kernel.v1.InspectProcessResponse.state:type_name -> ua_kernel.v1.ProcessState
-	65, // 7: ua_kernel.v1.InspectProcessResponse.start_time:type_name -> google.protobuf.Timestamp
-	65, // 8: ua_kernel.v1.IssueLocalCertificateResponse.expires_at:type_name -> google.protobuf.Timestamp
-	59, // 9: ua_kernel.v1.StoreSecretRequest.metadata:type_name -> ua_kernel.v1.StoreSecretRequest.MetadataEntry
-	65, // 10: ua_kernel.v1.StoreSecretResponse.created_at:type_name -> google.protobuf.Timestamp
-	60, // 11: ua_kernel.v1.GetSecretResponse.metadata:type_name -> ua_kernel.v1.GetSecretResponse.MetadataEntry
-	65, // 12: ua_kernel.v1.GetSecretResponse.created_at:type_name -> google.protobuf.Timestamp
-	32, // 13: ua_kernel.v1.ListSecretsResponse.secrets:type_name -> ua_kernel.v1.SecretMetadata
-	65, // 14: ua_kernel.v1.SecretMetadata.created_at:type_name -> google.protobuf.Timestamp
-	61, // 15: ua_kernel.v1.SecretMetadata.metadata:type_name -> ua_kernel.v1.SecretMetadata.MetadataEntry
-	35, // 16: ua_kernel.v1.GetClusterStateResponse.nodes:type_name -> ua_kernel.v1.NodeInfo
-	3,  // 17: ua_kernel.v1.GetClusterStateResponse.health:type_name -> ua_kernel.v1.ClusterHealth
-	1,  // 18: ua_kernel.v1.NodeInfo.role:type_name -> ua_kernel.v1.NodeRole
-	2,  // 19: ua_kernel.v1.NodeInfo.state:type_name -> ua_kernel.v1.NodeState
-	65, // 20: ua_kernel.v1.NodeInfo.last_seen:type_name -> google.protobuf.Timestamp
-	35, // 21: ua_kernel.v1.ProposeClusterConfigRequest.nodes:type_name -> ua_kernel.v1.NodeInfo
-	65, // 22: ua_kernel.v1.GetKVResponse.updated_at:type_name -> google.protobuf.Timestamp
-	65, // 23: ua_kernel.v1.PutKVResponse.updated_at:type_name -> google.protobuf.Timestamp
-	5,  // 24: ua_kernel.v1.InstallProviderRequest.trust_tier:type_name -> ua_kernel.v1.TrustTier
-	62, // 25: ua_kernel.v1.StartProviderRequest.config:type_name -> ua_kernel.v1.StartProviderRequest.ConfigEntry
-	63, // 26: ua_kernel.v1.GrantCapabilityRequest.config:type_name -> ua_kernel.v1.GrantCapabilityRequest.ConfigEntry
-	56, // 27: ua_kernel.v1.ListProvidersResponse.providers:type_name -> ua_kernel.v1.ProviderInfo
-	4,  // 28: ua_kernel.v1.ProviderInfo.state:type_name -> ua_kernel.v1.ProviderState
-	5,  // 29: ua_kernel.v1.ProviderInfo.trust_tier:type_name -> ua_kernel.v1.TrustTier
-	65, // 30: ua_kernel.v1.ProviderInfo.installed_at:type_name -> google.protobuf.Timestamp
-	65, // 31: ua_kernel.v1.ProviderInfo.started_at:type_name -> google.protobuf.Timestamp
-	6,  // 32: ua_kernel.v1.EventService.EmitEvent:input_type -> ua_kernel.v1.EmitEventRequest
-	8,  // 33: ua_kernel.v1.EventService.SubscribeLocal:input_type -> ua_kernel.v1.SubscribeLocalRequest
-	10, // 34: ua_kernel.v1.ExecService.RunProcess:input_type -> ua_kernel.v1.RunProcessRequest
-	12, // 35: ua_kernel.v1.ExecService.StopProcess:input_type -> ua_kernel.v1.StopProcessRequest
-	14, // 36: ua_kernel.v1.ExecService.InspectProcess:input_type -> ua_kernel.v1.InspectProcessRequest
-	16, // 37: ua_kernel.v1.IdentityService.GetNodeIdentity:input_type -> ua_kernel.v1.GetNodeIdentityRequest
-	18, // 38: ua_kernel.v1.IdentityService.SignPayload:input_type -> ua_kernel.v1.SignPayloadRequest
-	20, // 39: ua_kernel.v1.IdentityService.VerifyTrust:input_type -> ua_kernel.v1.VerifyTrustRequest
-	22, // 40: ua_kernel.v1.IdentityService.IssueLocalCertificate:input_type -> ua_kernel.v1.IssueLocalCertificateRequest
-	24, // 41: ua_kernel.v1.SecretService.StoreSecret:input_type -> ua_kernel.v1.StoreSecretRequest
-	26, // 42: ua_kernel.v1.SecretService.GetSecret:input_type -> ua_kernel.v1.GetSecretRequest
-	28, // 43: ua_kernel.v1.SecretService.MountSecret:input_type -> ua_kernel.v1.MountSecretRequest
-	30, // 44: ua_kernel.v1.SecretService.ListSecrets:input_type -> ua_kernel.v1.ListSecretsRequest
-	33, // 45: ua_kernel.v1.ClusterService.GetClusterState:input_type -> ua_kernel.v1.GetClusterStateRequest
-	36, // 46: ua_kernel.v1.ClusterService.ProposeClusterConfig:input_type -> ua_kernel.v1.ProposeClusterConfigRequest
-	38, // 47: ua_kernel.v1.ClusterService.JoinCluster:input_type -> ua_kernel.v1.JoinClusterRequest
-	40, // 48: ua_kernel.v1.ClusterService.GetKV:input_type -> ua_kernel.v1.GetKVRequest
-	42, // 49: ua_kernel.v1.ClusterService.PutKV:input_type -> ua_kernel.v1.PutKVRequest
-	44, // 50: ua_kernel.v1.ProviderService.InstallProvider:input_type -> ua_kernel.v1.InstallProviderRequest
-	46, // 51: ua_kernel.v1.ProviderService.StartProvider:input_type -> ua_kernel.v1.StartProviderRequest
-	48, // 52: ua_kernel.v1.ProviderService.StopProvider:input_type -> ua_kernel.v1.StopProviderRequest
-	50, // 53: ua_kernel.v1.ProviderService.GrantCapability:input_type -> ua_kernel.v1.GrantCapabilityRequest
-	52, // 54: ua_kernel.v1.ProviderService.RevokeCapability:input_type -> ua_kernel.v1.RevokeCapabilityRequest
-	54, // 55: ua_kernel.v1.ProviderService.ListProviders:input_type -> ua_kernel.v1.ListProvidersRequest
-	7,  // 56: ua_kernel.v1.EventService.EmitEvent:output_type -> ua_kernel.v1.EmitEventResponse
-	9,  // 57: ua_kernel.v1.EventService.SubscribeLocal:output_type -> ua_kernel.v1.LocalEvent
-	11, // 58: ua_kernel.v1.ExecService.RunProcess:output_type -> ua_kernel.v1.RunProcessResponse
-	13, // 59: ua_kernel.v1.ExecService.StopProcess:output_type -> ua_kernel.v1.StopProcessResponse
-	15, // 60: ua_kernel.v1.ExecService.InspectProcess:output_type -> ua_kernel.v1.InspectProcessResponse
-	17, // 61: ua_kernel.v1.IdentityService.GetNodeIdentity:output_type -> ua_kernel.v1.GetNodeIdentityResponse
-	19, // 62: ua_kernel.v1.IdentityService.SignPayload:output_type -> ua_kernel.v1.SignPayloadResponse
-	21, // 63: ua_kernel.v1.IdentityService.VerifyTrust:output_type -> ua_kernel.v1.VerifyTrustResponse
-	23, // 64: ua_kernel.v1.IdentityService.IssueLocalCertificate:output_type -> ua_kernel.v1.IssueLocalCertificateResponse
-	25, // 65: ua_kernel.v1.SecretService.StoreSecret:output_type -> ua_kernel.v1.StoreSecretResponse
-	27, // 66: ua_kernel.v1.SecretService.GetSecret:output_type -> ua_kernel.v1.GetSecretResponse
-	29, // 67: ua_kernel.v1.SecretService.MountSecret:output_type -> ua_kernel.v1.MountSecretResponse
-	31, // 68: ua_kernel.v1.SecretService.ListSecrets:output_type -> ua_kernel.v1.ListSecretsResponse
-	34, // 69: ua_kernel.v1.ClusterService.GetClusterState:output_type -> ua_kernel.v1.GetClusterStateResponse
-	37, // 70: ua_kernel.v1.ClusterService.ProposeClusterConfig:output_type -> ua_kernel.v1.ProposeClusterConfigResponse
-	39, // 71: ua_kernel.v1.ClusterService.JoinCluster:output_type -> ua_kernel.v1.JoinClusterResponse
-	41, // 72: ua_kernel.v1.ClusterService.GetKV:output_type -> ua_kernel.v1.GetKVResponse
-	43, // 73: ua_kernel.v1.ClusterService.PutKV:output_type -> ua_kernel.v1.PutKVResponse
-	45, // 74: ua_kernel.v1.ProviderService.InstallProvider:output_type -> ua_kernel.v1.InstallProviderResponse
-	47, // 75: ua_kernel.v1.ProviderService.StartProvider:output_type -> ua_kernel.v1.StartProviderResponse
-	49, // 76: ua_kernel.v1.ProviderService.StopProvider:output_type -> ua_kernel.v1.StopProviderResponse
-	51, // 77: ua_kernel.v1.ProviderService.GrantCapability:output_type -> ua_kernel.v1.GrantCapabilityResponse
-	53, // 78: ua_kernel.v1.ProviderService.RevokeCapability:output_type -> ua_kernel.v1.RevokeCapabilityResponse
-	55, // 79: ua_kernel.v1.ProviderService.ListProviders:output_type -> ua_kernel.v1.ListProvidersResponse
-	56, // [56:80] is the sub-list for method output_type
-	32, // [32:56] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	68, // 7: ua_kernel.v1.InspectProcessResponse.start_time:type_name -> google.protobuf.Timestamp
+	18, // 8: ua_kernel.v1.AllocateResourcesRequest.limits:type_name -> ua_kernel.v1.ResourceLimits
+	68, // 9: ua_kernel.v1.IssueLocalCertificateResponse.expires_at:type_name -> google.protobuf.Timestamp
+	62, // 10: ua_kernel.v1.StoreSecretRequest.metadata:type_name -> ua_kernel.v1.StoreSecretRequest.MetadataEntry
+	68, // 11: ua_kernel.v1.StoreSecretResponse.created_at:type_name -> google.protobuf.Timestamp
+	63, // 12: ua_kernel.v1.GetSecretResponse.metadata:type_name -> ua_kernel.v1.GetSecretResponse.MetadataEntry
+	68, // 13: ua_kernel.v1.GetSecretResponse.created_at:type_name -> google.protobuf.Timestamp
+	35, // 14: ua_kernel.v1.ListSecretsResponse.secrets:type_name -> ua_kernel.v1.SecretMetadata
+	68, // 15: ua_kernel.v1.SecretMetadata.created_at:type_name -> google.protobuf.Timestamp
+	64, // 16: ua_kernel.v1.SecretMetadata.metadata:type_name -> ua_kernel.v1.SecretMetadata.MetadataEntry
+	38, // 17: ua_kernel.v1.GetClusterStateResponse.nodes:type_name -> ua_kernel.v1.NodeInfo
+	3,  // 18: ua_kernel.v1.GetClusterStateResponse.health:type_name -> ua_kernel.v1.ClusterHealth
+	1,  // 19: ua_kernel.v1.NodeInfo.role:type_name -> ua_kernel.v1.NodeRole
+	2,  // 20: ua_kernel.v1.NodeInfo.state:type_name -> ua_kernel.v1.NodeState
+	68, // 21: ua_kernel.v1.NodeInfo.last_seen:type_name -> google.protobuf.Timestamp
+	38, // 22: ua_kernel.v1.ProposeClusterConfigRequest.nodes:type_name -> ua_kernel.v1.NodeInfo
+	68, // 23: ua_kernel.v1.GetKVResponse.updated_at:type_name -> google.protobuf.Timestamp
+	68, // 24: ua_kernel.v1.PutKVResponse.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 25: ua_kernel.v1.InstallProviderRequest.trust_tier:type_name -> ua_kernel.v1.TrustTier
+	65, // 26: ua_kernel.v1.StartProviderRequest.config:type_name -> ua_kernel.v1.StartProviderRequest.ConfigEntry
+	66, // 27: ua_kernel.v1.GrantCapabilityRequest.config:type_name -> ua_kernel.v1.GrantCapabilityRequest.ConfigEntry
+	59, // 28: ua_kernel.v1.ListProvidersResponse.providers:type_name -> ua_kernel.v1.ProviderInfo
+	4,  // 29: ua_kernel.v1.ProviderInfo.state:type_name -> ua_kernel.v1.ProviderState
+	5,  // 30: ua_kernel.v1.ProviderInfo.trust_tier:type_name -> ua_kernel.v1.TrustTier
+	68, // 31: ua_kernel.v1.ProviderInfo.installed_at:type_name -> google.protobuf.Timestamp
+	68, // 32: ua_kernel.v1.ProviderInfo.started_at:type_name -> google.protobuf.Timestamp
+	6,  // 33: ua_kernel.v1.EventService.EmitEvent:input_type -> ua_kernel.v1.EmitEventRequest
+	8,  // 34: ua_kernel.v1.EventService.SubscribeLocal:input_type -> ua_kernel.v1.SubscribeLocalRequest
+	10, // 35: ua_kernel.v1.ExecService.RunProcess:input_type -> ua_kernel.v1.RunProcessRequest
+	12, // 36: ua_kernel.v1.ExecService.StopProcess:input_type -> ua_kernel.v1.StopProcessRequest
+	14, // 37: ua_kernel.v1.ExecService.InspectProcess:input_type -> ua_kernel.v1.InspectProcessRequest
+	16, // 38: ua_kernel.v1.ExecService.AllocateResources:input_type -> ua_kernel.v1.AllocateResourcesRequest
+	19, // 39: ua_kernel.v1.IdentityService.GetNodeIdentity:input_type -> ua_kernel.v1.GetNodeIdentityRequest
+	21, // 40: ua_kernel.v1.IdentityService.SignPayload:input_type -> ua_kernel.v1.SignPayloadRequest
+	23, // 41: ua_kernel.v1.IdentityService.VerifyTrust:input_type -> ua_kernel.v1.VerifyTrustRequest
+	25, // 42: ua_kernel.v1.IdentityService.IssueLocalCertificate:input_type -> ua_kernel.v1.IssueLocalCertificateRequest
+	27, // 43: ua_kernel.v1.SecretService.StoreSecret:input_type -> ua_kernel.v1.StoreSecretRequest
+	29, // 44: ua_kernel.v1.SecretService.GetSecret:input_type -> ua_kernel.v1.GetSecretRequest
+	31, // 45: ua_kernel.v1.SecretService.MountSecret:input_type -> ua_kernel.v1.MountSecretRequest
+	33, // 46: ua_kernel.v1.SecretService.ListSecrets:input_type -> ua_kernel.v1.ListSecretsRequest
+	36, // 47: ua_kernel.v1.ClusterService.GetClusterState:input_type -> ua_kernel.v1.GetClusterStateRequest
+	39, // 48: ua_kernel.v1.ClusterService.ProposeClusterConfig:input_type -> ua_kernel.v1.ProposeClusterConfigRequest
+	41, // 49: ua_kernel.v1.ClusterService.JoinCluster:input_type -> ua_kernel.v1.JoinClusterRequest
+	43, // 50: ua_kernel.v1.ClusterService.GetKV:input_type -> ua_kernel.v1.GetKVRequest
+	45, // 51: ua_kernel.v1.ClusterService.PutKV:input_type -> ua_kernel.v1.PutKVRequest
+	47, // 52: ua_kernel.v1.ProviderService.InstallProvider:input_type -> ua_kernel.v1.InstallProviderRequest
+	49, // 53: ua_kernel.v1.ProviderService.StartProvider:input_type -> ua_kernel.v1.StartProviderRequest
+	51, // 54: ua_kernel.v1.ProviderService.StopProvider:input_type -> ua_kernel.v1.StopProviderRequest
+	53, // 55: ua_kernel.v1.ProviderService.GrantCapability:input_type -> ua_kernel.v1.GrantCapabilityRequest
+	55, // 56: ua_kernel.v1.ProviderService.RevokeCapability:input_type -> ua_kernel.v1.RevokeCapabilityRequest
+	57, // 57: ua_kernel.v1.ProviderService.ListProviders:input_type -> ua_kernel.v1.ListProvidersRequest
+	7,  // 58: ua_kernel.v1.EventService.EmitEvent:output_type -> ua_kernel.v1.EmitEventResponse
+	9,  // 59: ua_kernel.v1.EventService.SubscribeLocal:output_type -> ua_kernel.v1.LocalEvent
+	11, // 60: ua_kernel.v1.ExecService.RunProcess:output_type -> ua_kernel.v1.RunProcessResponse
+	13, // 61: ua_kernel.v1.ExecService.StopProcess:output_type -> ua_kernel.v1.StopProcessResponse
+	15, // 62: ua_kernel.v1.ExecService.InspectProcess:output_type -> ua_kernel.v1.InspectProcessResponse
+	17, // 63: ua_kernel.v1.ExecService.AllocateResources:output_type -> ua_kernel.v1.AllocateResourcesResponse
+	20, // 64: ua_kernel.v1.IdentityService.GetNodeIdentity:output_type -> ua_kernel.v1.GetNodeIdentityResponse
+	22, // 65: ua_kernel.v1.IdentityService.SignPayload:output_type -> ua_kernel.v1.SignPayloadResponse
+	24, // 66: ua_kernel.v1.IdentityService.VerifyTrust:output_type -> ua_kernel.v1.VerifyTrustResponse
+	26, // 67: ua_kernel.v1.IdentityService.IssueLocalCertificate:output_type -> ua_kernel.v1.IssueLocalCertificateResponse
+	28, // 68: ua_kernel.v1.SecretService.StoreSecret:output_type -> ua_kernel.v1.StoreSecretResponse
+	30, // 69: ua_kernel.v1.SecretService.GetSecret:output_type -> ua_kernel.v1.GetSecretResponse
+	32, // 70: ua_kernel.v1.SecretService.MountSecret:output_type -> ua_kernel.v1.MountSecretResponse
+	34, // 71: ua_kernel.v1.SecretService.ListSecrets:output_type -> ua_kernel.v1.ListSecretsResponse
+	37, // 72: ua_kernel.v1.ClusterService.GetClusterState:output_type -> ua_kernel.v1.GetClusterStateResponse
+	40, // 73: ua_kernel.v1.ClusterService.ProposeClusterConfig:output_type -> ua_kernel.v1.ProposeClusterConfigResponse
+	42, // 74: ua_kernel.v1.ClusterService.JoinCluster:output_type -> ua_kernel.v1.JoinClusterResponse
+	44, // 75: ua_kernel.v1.ClusterService.GetKV:output_type -> ua_kernel.v1.GetKVResponse
+	46, // 76: ua_kernel.v1.ClusterService.PutKV:output_type -> ua_kernel.v1.PutKVResponse
+	48, // 77: ua_kernel.v1.ProviderService.InstallProvider:output_type -> ua_kernel.v1.InstallProviderResponse
+	50, // 78: ua_kernel.v1.ProviderService.StartProvider:output_type -> ua_kernel.v1.StartProviderResponse
+	52, // 79: ua_kernel.v1.ProviderService.StopProvider:output_type -> ua_kernel.v1.StopProviderResponse
+	54, // 80: ua_kernel.v1.ProviderService.GrantCapability:output_type -> ua_kernel.v1.GrantCapabilityResponse
+	56, // 81: ua_kernel.v1.ProviderService.RevokeCapability:output_type -> ua_kernel.v1.RevokeCapabilityResponse
+	58, // 82: ua_kernel.v1.ProviderService.ListProviders:output_type -> ua_kernel.v1.ListProvidersResponse
+	58, // [58:83] is the sub-list for method output_type
+	33, // [33:58] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_proto_ua_kernel_v1_syscall_proto_init() }
@@ -3948,7 +4158,7 @@ func file_proto_ua_kernel_v1_syscall_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_ua_kernel_v1_syscall_proto_rawDesc), len(file_proto_ua_kernel_v1_syscall_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   58,
+			NumMessages:   61,
 			NumExtensions: 0,
 			NumServices:   6,
 		},

@@ -26,6 +26,9 @@ service ExecService {
   
   // InspectProcess retrieves process status and metadata
   rpc InspectProcess(InspectProcessRequest) returns (InspectProcessResponse);
+  
+  // AllocateResources allocates resource limits for a process
+  rpc AllocateResources(AllocateResourcesRequest) returns (AllocateResourcesResponse);
 }
 
 // IdentityService manages node identity and cryptographic operations
@@ -191,6 +194,24 @@ enum ProcessState {
   PROCESS_STATE_RESTARTING = 7;
 }
 
+message AllocateResourcesRequest {
+  string process_id = 1;
+  ResourceLimits limits = 2;
+}
+
+message AllocateResourcesResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ResourceLimits {
+  uint64 cpu_millicores = 1;    // CPU limit in millicores (1000 = 1 core)
+  uint64 memory_bytes = 2;      // Memory limit in bytes
+  uint64 disk_bytes = 3;        // Disk/storage limit in bytes
+  uint32 max_processes = 4;     // Maximum number of processes
+  uint32 max_open_files = 5;    // Maximum number of open files
+}
+
 // ========================================
 // Identity Service Messages
 // ========================================
@@ -351,6 +372,7 @@ message ProposeClusterConfigResponse {
 message JoinClusterRequest {
   string join_token = 1;
   string node_address = 2;
+  string node_id = 3;
 }
 
 message JoinClusterResponse {

@@ -171,9 +171,10 @@ var EventService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ExecService_RunProcess_FullMethodName     = "/ua_kernel.v1.ExecService/RunProcess"
-	ExecService_StopProcess_FullMethodName    = "/ua_kernel.v1.ExecService/StopProcess"
-	ExecService_InspectProcess_FullMethodName = "/ua_kernel.v1.ExecService/InspectProcess"
+	ExecService_RunProcess_FullMethodName        = "/ua_kernel.v1.ExecService/RunProcess"
+	ExecService_StopProcess_FullMethodName       = "/ua_kernel.v1.ExecService/StopProcess"
+	ExecService_InspectProcess_FullMethodName    = "/ua_kernel.v1.ExecService/InspectProcess"
+	ExecService_AllocateResources_FullMethodName = "/ua_kernel.v1.ExecService/AllocateResources"
 )
 
 // ExecServiceClient is the client API for ExecService service.
@@ -188,6 +189,8 @@ type ExecServiceClient interface {
 	StopProcess(ctx context.Context, in *StopProcessRequest, opts ...grpc.CallOption) (*StopProcessResponse, error)
 	// InspectProcess retrieves process status and metadata
 	InspectProcess(ctx context.Context, in *InspectProcessRequest, opts ...grpc.CallOption) (*InspectProcessResponse, error)
+	// AllocateResources allocates resource limits for a process
+	AllocateResources(ctx context.Context, in *AllocateResourcesRequest, opts ...grpc.CallOption) (*AllocateResourcesResponse, error)
 }
 
 type execServiceClient struct {
@@ -228,6 +231,16 @@ func (c *execServiceClient) InspectProcess(ctx context.Context, in *InspectProce
 	return out, nil
 }
 
+func (c *execServiceClient) AllocateResources(ctx context.Context, in *AllocateResourcesRequest, opts ...grpc.CallOption) (*AllocateResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AllocateResourcesResponse)
+	err := c.cc.Invoke(ctx, ExecService_AllocateResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ExecServiceServer is the server API for ExecService service.
 // All implementations must embed UnimplementedExecServiceServer
 // for forward compatibility.
@@ -240,6 +253,8 @@ type ExecServiceServer interface {
 	StopProcess(context.Context, *StopProcessRequest) (*StopProcessResponse, error)
 	// InspectProcess retrieves process status and metadata
 	InspectProcess(context.Context, *InspectProcessRequest) (*InspectProcessResponse, error)
+	// AllocateResources allocates resource limits for a process
+	AllocateResources(context.Context, *AllocateResourcesRequest) (*AllocateResourcesResponse, error)
 	mustEmbedUnimplementedExecServiceServer()
 }
 
@@ -258,6 +273,9 @@ func (UnimplementedExecServiceServer) StopProcess(context.Context, *StopProcessR
 }
 func (UnimplementedExecServiceServer) InspectProcess(context.Context, *InspectProcessRequest) (*InspectProcessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InspectProcess not implemented")
+}
+func (UnimplementedExecServiceServer) AllocateResources(context.Context, *AllocateResourcesRequest) (*AllocateResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AllocateResources not implemented")
 }
 func (UnimplementedExecServiceServer) mustEmbedUnimplementedExecServiceServer() {}
 func (UnimplementedExecServiceServer) testEmbeddedByValue()                     {}
@@ -334,6 +352,24 @@ func _ExecService_InspectProcess_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ExecService_AllocateResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AllocateResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ExecServiceServer).AllocateResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ExecService_AllocateResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ExecServiceServer).AllocateResources(ctx, req.(*AllocateResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ExecService_ServiceDesc is the grpc.ServiceDesc for ExecService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -352,6 +388,10 @@ var ExecService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InspectProcess",
 			Handler:    _ExecService_InspectProcess_Handler,
+		},
+		{
+			MethodName: "AllocateResources",
+			Handler:    _ExecService_AllocateResources_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

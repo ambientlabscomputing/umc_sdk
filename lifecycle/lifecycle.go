@@ -90,7 +90,7 @@ func (l *Launcher) Start(ctx context.Context) error {
 func (l *Launcher) Stop(ctx context.Context) error {
 	l.mu.Lock()
 	l.state = types.ComponentStateStopping
-	l.mu.Lock()
+	l.mu.Unlock()
 
 	l.logger.Info("stopping components", "count", len(l.components))
 

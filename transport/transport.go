@@ -105,9 +105,9 @@ func ClientTLSConfig(certFile, keyFile, caFile string) (*tls.Config, error) {
 
 // PeerInfo holds peer identity information extracted from gRPC context
 type PeerInfo struct {
-	Address   string
-	IsUnix    bool
-	IsTLS     bool
+	Address    string
+	IsUnix     bool
+	IsTLS      bool
 	TLSSubject string
 }
 
