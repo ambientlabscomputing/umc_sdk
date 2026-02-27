@@ -23,6 +23,7 @@ type StreamClient interface {
 // ConsumerConfig holds consumer configuration
 type ConsumerConfig struct {
 	Name           string
+	Context        context.Context
 	DialFunc       func() (*grpc.ClientConn, error)
 	StreamFunc     func(*grpc.ClientConn) (StreamClient, error)
 	Handler        EventHandler
@@ -57,7 +58,12 @@ func NewConsumer(cfg ConsumerConfig) *Consumer {
 		cfg.MaxReconnect = 60 * time.Second
 	}
 
-	ctx, cancel := context.WithCancel(context.Background())
+	// Use provided context or fall back to background
+	ctx := cfg.Context
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	ctx, cancel := context.WithCancel(ctx)
 
 	return &Consumer{
 		name:           cfg.Name,
@@ -74,7 +80,7 @@ func NewConsumer(cfg ConsumerConfig) *Consumer {
 }
 
 // Start begins consuming events with automatic reconnection
-func (c *Consumer) Start(_ context.Context) error {
+func (c *Consumer) Start(ctx context.Context) error {
 	c.logger.Info("starting event consumer", "name", c.name)
 	go c.consumeLoop()
 	return nil
