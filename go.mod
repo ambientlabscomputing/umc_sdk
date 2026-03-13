@@ -3,7 +3,7 @@ module github.com/ambientlabscomputing/umc_sdk
 go 1.25.5
 
 require (
-	github.com/ambientlabscomputing/mycelium_spine/sdk v1.0.2
+	github.com/ambientlabscomputing/mycelium_spine/sdk v1.1.0
 	github.com/google/uuid v1.6.0
 	github.com/lmittmann/tint v1.0.6
 	github.com/natefinch/lumberjack v2.0.0+incompatible
@@ -13,7 +13,7 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.6.0 // indirect
-	github.com/ambientlabscomputing/mycelium_spine v1.0.1 // indirect
+	github.com/ambientlabscomputing/mycelium_spine v1.0.2 // indirect
 	golang.org/x/net v0.50.0 // indirect
 	golang.org/x/sys v0.41.0 // indirect
 	golang.org/x/text v0.34.0 // indirect
