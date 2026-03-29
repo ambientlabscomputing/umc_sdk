@@ -3,7 +3,7 @@ module github.com/ambientlabscomputing/umc_sdk
 go 1.25.5
 
 require (
-	github.com/ambientlabscomputing/mycelium_spine/sdk v1.2.0-rc.2
+	github.com/ambientlabscomputing/mycelium_spine/sdk v1.2.0
 	github.com/google/uuid v1.6.0
 	github.com/lmittmann/tint v1.0.6
 	github.com/natefinch/lumberjack v2.0.0+incompatible
